@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import request from './utils/request';
 
 import Navbar from './Navbar';
-import Blog from './Blog';
 
 import ToDos from './ToDos'
 
@@ -170,13 +169,6 @@ export default class App extends Component {
         }
 
 
-        {/* <Blog
-          posts={this.state.tasks}
-          userEmail={this.state.user && this.state.user.email}
-          addPost={this.addTask}
-          updatePost={this.updateTask}
-          deletePost={this.deleteTask}
-        /> */}
       </div>
     );
   }
