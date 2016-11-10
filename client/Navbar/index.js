@@ -1,5 +1,7 @@
 // Component here uses ES6 destructuring syntax in import, what is means is "retrieve the property 'Component' off of the object exported from the 'react'"
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
+import { localAuthRequest } from '../redux/actionCreators';
+import { connect } from 'react-redux';
 
 // images
 import logo from './logo.svg';
@@ -7,12 +9,20 @@ import logo from './logo.svg';
 // styling
 import './index.css';
 
-
+@connect(store => ({
+  user: store.user
+}))
 export default class Navbar extends Component {
-  handleLocalAuth = () => {
+  static propTypes = {
+    user: PropTypes.object,
+    dispatch: PropTypes.func.isRequired
+  }
+
+  handleLocalAuth = (user) => {
     const email = this.refs.email && this.refs.email.value;
     const password = this.refs.password && this.refs.password.value;
-    this.props.localAuth(email, password);
+
+    this.props.dispatch(localAuthRequest(user._id, email, password));
   }
 
   render() {

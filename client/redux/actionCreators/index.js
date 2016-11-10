@@ -15,18 +15,18 @@ export function initializationRequests() {
 
     request.get('/auth/session')
       .then(
-        ({ data: user }) => {
+        ({ data: user }) =>
           Promise.all([
             Promise.resolve(user),
-            request.get(`/api/tasks/${user._id}`)
+             user && user._id && request.get(`/api/tasks/${user._id}`) || {}
           ])
-        })
-      .then(([userData, { data: tasks }]) =>
+        )
+      .then(([userData, { data: tasks = []}]) =>
               dispatch(initializeUserAndTasks({
                 user: userData || null,
-                tasks: tasks.sort((a,b) => Date.parse(b.createdDate) - Date.parse(a.createdDate)) // sort by date, descending
+                tasks:tasks.sort((a,b) => Date.parse(b.createdDate) - Date.parse(a.createdDate)) // sort by date, descending
               }))
-      )
+      ).catch( err => console.log(err))
   }
 
 export function localAuth(user) {
