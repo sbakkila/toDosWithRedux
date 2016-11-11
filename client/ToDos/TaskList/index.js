@@ -1,19 +1,49 @@
-// this.updateTask
-import React, {Component} from 'react';
+// Component here uses ES6 destructuring syntax in import, what is means is "retrieve the property 'Component' off of the object exported from the 'react'"
+import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
 
-// this.updateTask = => {
-//
-// }
+// components
+import TaskItems from './TaskItems';
 
+// action creators
+import {
+  deleteTaskRequest
+} from '../../redux/actionCreators';
+
+
+@connect(store => ({
+  tasks: store.tasks,
+  userID: store.user && store.user._id
+}))
 export default class TaskList extends Component {
- render() {
-   return (
-     <div>
-      <p>{this.props.task}</p>
-      <button onClick={this.props.deleteTask.bind(this, this.props.id)}>Delete</button>
+  static propTypes = {
+    tasks: PropTypes.arrayOf(PropTypes.shape({
+      text: PropTypes.string.isRequired,
+      createdDate: PropTypes.string.isRequired,
+      user: PropTypes.string.isRequired
+    })).isRequired,
+    dispatch: PropTypes.func.isRequired
+  }
 
-    </div>
-  );
- }
 
+  deleteTask = _id => this.props.dispatch(deleteTaskRequest(_id));
+
+  render() {
+    return (
+      <ul className="blog-task-list">
+        {
+          this.props.tasks.map((task, index) =>
+            <TaskItems
+              task={task}
+              index={index}
+              key={task._id}
+              delete={this.deleteTask}
+              edit={this.editTask}
+              userEmail={this.props.userEmail}
+            />
+          )
+        }
+      </ul>
+    );
+  }
 }
