@@ -4,7 +4,8 @@ const initialState = {
   user: null,
   tasks: [],
   taskForm: {
-    text: ''
+    text: '',
+    user: ''
   }
 };
 
@@ -13,7 +14,7 @@ const rootReducer = (state = initialState, action) => {
     case actionTypes.INITIALIZE_APP :
       return Object.assign({},state,{
         user: action.user,
-        posts: action.posts
+        tasks: action.tasks
       });
 
     case actionTypes.LOCAL_AUTH :
@@ -29,17 +30,22 @@ const rootReducer = (state = initialState, action) => {
     case actionTypes.ADD_TASK :
       // state is immutable, each change replaces an old object with a new one
       return Object.assign({},state,{
-        posts: [
-          action.post,
-          ...state.posts
+        tasks: [
+          action.task,
+          ...state.tasks
         ],
-        taskForm: Object.assign({}, initialState.postForm) // clear form
+        taskForm: Object.assign({}, initialState.taskForm) // clear form
       });
 
     case actionTypes.DELETE_TASK :
       return Object.assign({},state,{
-        posts: state.posts.filter(post => post._id !== action._id),
+        tasks: state.tasks.filter(task => task._id !== action._id),
       });
+
+    case actionTypes.TEXT_CHANGE :
+      return Object.assign({},state,{
+        taskForm: Object.assign({}, action.taskForm)
+      })
 
     default:
       return state;

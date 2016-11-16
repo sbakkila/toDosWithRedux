@@ -9,7 +9,7 @@ export default class ToDos extends Component {
     return (
       <div>
         <CreateToDos />
-          <TaskList />
+        <TaskList />
       </div>
     )
   }

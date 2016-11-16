@@ -35,11 +35,11 @@ export default class TaskList extends Component {
           this.props.tasks.map((task, index) =>
             <TaskItems
               task={task}
-              index={index}
-              key={task._id}
-              delete={this.deleteTask}
-              edit={this.editTask}
-              userEmail={this.props.userEmail}
+              // index={index}
+              // key={task._id}
+              // delete={this.deleteTask}
+              // edit={this.editTask}
+              // userEmail={this.props.userEmail}
             />
           )
         }

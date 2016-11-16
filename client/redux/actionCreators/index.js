@@ -74,7 +74,7 @@ export function addTask(task) {
 
 export function addTaskRequest(taskBody) {
  return dispatch => request.post({
-   route: `/add/task/${taskBody.user}`,
+   route: `api/add/task/`,
    body: taskBody
  }).then(({ data }) => dispatch(addTask(data)));
 }
@@ -90,4 +90,11 @@ export function deleteTask(_id) {
 export function deleteTaskRequest(_id) {
  return dispatch => request.delete(`/delete/task/${_id}`)
    .then(res => dispatch(deleteTask(_id)));
+}
+
+export function textChange(text) {
+  return {
+    type: actionTypes.TEXT_CHANGE,
+    text
+  }
 }

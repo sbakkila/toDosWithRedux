@@ -10,7 +10,7 @@ export default class TaskItems extends Component {
    return (
      <div>
       <p>{this.props.task}</p>
-      <button onClick={this.props.deleteTask.bind(this, this.props.id)}>Delete</button>
+      {/* <button onClick={this.props.deleteTask.bind(this, this.props._id)}>Delete</button> */}
 
     </div>
   );
