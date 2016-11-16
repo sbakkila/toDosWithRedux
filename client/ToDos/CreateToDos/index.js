@@ -27,7 +27,7 @@ export default class CreateToDos extends Component {
 
     addTaskRequest({
       text: this.props.taskForm.text,
-      user: this.user
+      user: this.props.user._id
     })
   );
 
@@ -40,7 +40,7 @@ export default class CreateToDos extends Component {
   render() {
     return (
     <li>
-      <input
+      <input value={this.props.taskForm.text}
         onChange={this.changeText}
       />
       <button onClick={this.addTask}>

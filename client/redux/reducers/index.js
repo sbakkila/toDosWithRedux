@@ -44,8 +44,10 @@ const rootReducer = (state = initialState, action) => {
 
     case actionTypes.TEXT_CHANGE :
       return Object.assign({},state,{
-        taskForm: Object.assign({}, action.taskForm)
+        taskForm: Object.assign({}, state.taskForm, action.text)
       })
+
+      // taskform: { text: <value> }
 
     default:
       return state;

@@ -88,7 +88,7 @@ export function deleteTask(_id) {
 }
 
 export function deleteTaskRequest(_id) {
- return dispatch => request.delete(`/delete/task/${_id}`)
+ return dispatch => request.delete(`api/delete/task/${_id}`)
    .then(res => dispatch(deleteTask(_id)));
 }
 
